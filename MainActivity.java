@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
     /**
      * This method is called when the + button is clicked.
      */
@@ -43,11 +44,33 @@ public class MainActivity extends AppCompatActivity {
      * This method is called when the order button is clicked.
      */
     public void submitOrder(View view) {
-        int price = quantity*5;
-        String priceMessage = "Total: $" + price;
-        priceMessage = priceMessage + "\nThank You!";
-        displayMessage(priceMessage);
+        int price = calculatePrice();
+        String summaryMessage = createOrderSummary(price);
+        displayMessage(summaryMessage);
     }
+
+    /**
+     * Calculates the price of the order.
+     *
+     *@return total price
+     */
+    private int calculatePrice() {
+        int price = quantity * 5;
+        return price;
+    }
+
+    /**
+     * This method creates an order summary
+     * @param price is price of the order
+     * @return text of the summary
+     */
+
+    private String createOrderSummary (int price){
+        String customerName = "Name: Kaptain Kunal";
+        String summary = customerName + "\nQuantity: " + quantity + "\nPrice: " + price + "\nThank You!";
+        return summary;
+    }
+
     /**
      * This method displays the given price on the screen.
      */
@@ -58,9 +81,9 @@ public class MainActivity extends AppCompatActivity {
     /**
      * This method displays the given quantity value on the screen.
      */
-    private void displayQuantity(int number) {
+    private void displayQuantity(int coffeeNumber) {
         TextView quantityTextView = (TextView) findViewById(R.id.quantity_text_view);
-        quantityTextView.setText("" + number);
+        quantityTextView.setText("" + coffeeNumber);
     }
     /**
      * This method displays the given text on the screen.
@@ -69,5 +92,8 @@ public class MainActivity extends AppCompatActivity {
         TextView priceTextView = (TextView) findViewById(R.id.price_text_view);
         priceTextView.setText(message);
     }
+
+
+
 
 }
