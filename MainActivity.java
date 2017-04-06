@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     public void decrement(View view) {
         // Toast message to alert we cannoy order less than 1 Coffee!
         if (quantity <= 1) {
-            Toast toast = Toast.makeText(getApplicationContext(), "You cannot have less than 1 Coffee!", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.less_than, Toast.LENGTH_SHORT);
             toast.show();
             return;
 
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (quantity >= 10){
      // Toast message to alert we cannot order more than 10 Coffees!
-            Toast toast = Toast.makeText(getApplicationContext(), "You cannot have more than 10 Coffees!", Toast.LENGTH_SHORT);
+            Toast toast = Toast.makeText(getApplicationContext(), R.string.more_than, Toast.LENGTH_SHORT);
             toast.show();
             return;
         }
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
        //Creates an email Intent to send an order confirmation
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, customerName + "'s Coffee Order Summary");
+        intent.putExtra(Intent.EXTRA_SUBJECT, customerName + getString(R.string.email_summary));
         intent.putExtra(Intent.EXTRA_TEXT, summaryMessage);
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
@@ -126,11 +126,11 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public String createOrderSummary (int price, boolean hasWhippedCream, boolean hasChocolate, String customerName) {
-        String customerName1 = "Name: " + customerName;
-        String summary = customerName1 +  "\nAdd Whipped Cream? " + hasWhippedCream;
-        summary += "\nAdd Chocolate? " + hasChocolate;
-        summary += "\nPrice: £" + price + "\nThank You!";
-        summary += "\nQuantity: " + quantity;
+        String customerName1 = getString(R.string.name_email) + customerName;
+        String summary = customerName1 +  getString(R.string.add_cream) + hasWhippedCream;
+        summary += getString(R.string.ad_chocolate) + hasChocolate;
+        summary += getString(R.string.price) + price + getString(R.string.thanks);
+        summary += getString(R.string.quantity_email) + quantity;
         return summary;
     }
 
